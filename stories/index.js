@@ -1,5 +1,5 @@
+//IMPORTING DEPENDENCIES
 import React from "react";
-
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import DayListItem from "components/DayListItem";
@@ -7,10 +7,17 @@ import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewersListItem";
 import InterviewerList from "components/InterviewerList";
 import Appointment from "components/Appointment/index.js";
+import Header from "components/Appointment/Header";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 import "index.scss";
-
 import Button from "components/Button";
+import Confirm from "components/Appointment/Confirm";
+import Status from "components/Appointment/Status";
+import Error from "components/Appointment/Error";
 
+
+//BUTTON STORY 
 storiesOf("Button", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -37,7 +44,7 @@ storiesOf("DayListItem", module) //Initiates Storybook and registers our DayList
     <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
   ));
 
-
+//DAYS ARRAY CONTAINING DAY AND SPOTS AVAILABLE
 const days = [
   {
     id: 1,
@@ -56,6 +63,8 @@ const days = [
   },
 ];
 
+
+//DAYLIST STORY WITH DAYS VALUE ONCHANGE PASSED AS PROPS
 storiesOf("DayList", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }],
@@ -70,12 +79,16 @@ storiesOf("DayList", module)
     <DayList days={days} value={"Wednesday"} onChange={action("setDay")} />
   ));
 
+
+  //INTERVIEWER OBJECT HARD CODED
 const interviewer = {
   id: 1,
   name: "Sylvia Palmer",
   avatar: "https://i.imgur.com/LpaY82x.png"
 };
 
+
+//INTERVIEWERLISTITEM STORY WHEN SELECTED UNSELECTED AND CLICKABLE WITH PROPS PASSED 
 storiesOf("InterviewerListItem", module)
   .addParameters({
     backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
@@ -104,6 +117,8 @@ storiesOf("InterviewerListItem", module)
   ));
 
 
+
+//INTERVIEWS ARRAY CONTAINING OBJECTS OF MENTORS INTERVIEWING WITH AVATAR
 const interviewers = [
   { id: 1, name: "Sylvia Palmer", avatar: "https://i.imgur.com/LpaY82x.png" },
   { id: 2, name: "Tori Malcolm", avatar: "https://i.imgur.com/Nmx0Qxo.png" },
@@ -135,9 +150,23 @@ storiesOf("InterviewerList", module)
   ));
 
 
+// STORIES OF PARENT BRANCH APPOINTMENT 
 storiesOf("Appointment", module)
   .addParameters({
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
   .add("Appointment", () => <Appointment />)
+  // APPOINTMENT WITH TIME PROP PASSED 
   .add("Appointment with time", () => <Appointment time='12pm' />)
+  //HEADER COMPONENT WITH TIME AS PROP PASSED
+  .add("Header", () => <Header time='12pm'/>) 
+   // EMPTY COMPONENT WITH ONADD ACTION PASSED AS PROP 
+  .add("Empty", () => <Empty onAdd = {action("onAdd")}/>) 
+  // SHOW COMPONENT WITH STUDENT, INTERVIEWER, ONEDIT AND ONDELETE PASSED AS PROPS
+  .add("Show", () => <Show student="Lydia Miller-Jones" interviewer={interviewer.name} onEdit={action("onEdit")} onDelete={action("onDelete")} />)
+  // CONFRIM COMPONENT WITH MESSAGE, ON CONFIRM, ON CANCEL PROPS PASSED 
+  .add("Confirm", () => <Confirm message="Delete the appointment?" onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>)
+  // STATUS COMPONENT WITH MESSAGE PROP
+  .add("Status", () => <Status message="Deleting"/>)
+  // ERROR COMPONENT WITH MESSAGE AND ONCLOSE FUNCTION 
+  .add("Error", () => <Error message ="Could not delete appointment" onClose={action('onClose')}/>)
