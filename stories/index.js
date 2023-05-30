@@ -15,6 +15,8 @@ import Button from "components/Button";
 import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
+import Form from "components/Appointment/Form";
+import { Fragment } from "react";
 
 
 //BUTTON STORY 
@@ -163,10 +165,32 @@ storiesOf("Appointment", module)
    // EMPTY COMPONENT WITH ONADD ACTION PASSED AS PROP 
   .add("Empty", () => <Empty onAdd = {action("onAdd")}/>) 
   // SHOW COMPONENT WITH STUDENT, INTERVIEWER, ONEDIT AND ONDELETE PASSED AS PROPS
-  .add("Show", () => <Show student="Lydia Miller-Jones" interviewer={interviewer.name} onEdit={action("onEdit")} onDelete={action("onDelete")} />)
+  .add("Show", () => <Show student="Lydia Miller-Jones" interviewer={interviewer.name} onEdit={action("onEdit")} onDelete={action("onDelete")}/>)
   // CONFRIM COMPONENT WITH MESSAGE, ON CONFIRM, ON CANCEL PROPS PASSED 
   .add("Confirm", () => <Confirm message="Delete the appointment?" onConfirm={action("onConfirm")} onCancel={action("onCancel")}/>)
   // STATUS COMPONENT WITH MESSAGE PROP
   .add("Status", () => <Status message="Deleting"/>)
-  // ERROR COMPONENT WITH MESSAGE AND ONCLOSE FUNCTION 
+  // ERROR COMPONENT WITH MESSAGE AND ONCLOSE FUNCTION PROPS
   .add("Error", () => <Error message ="Could not delete appointment" onClose={action('onClose')}/>)
+  // EDIT FORM COMPONENT WITH PROPS PASSED 
+  .add("Edit", () => <Form student="John Doe" interviewer={2} interviewers={interviewers} onSave={action('onSave')} onCancel={action('onCancel')}/> )
+  // CREATE FORM WITH PROPS 
+  .add("Create", () => <Form interviewers={interviewers} onSave={action('onSave')} onCancel={action('onCancel')}/> )
+  // APOINTMENT EMPTY
+  .add("Appointment Empty", () => (
+    <Fragment>
+      <Appointment id={1} time="4pm" />
+      <Appointment key="last" time="5pm" />
+    </Fragment>
+  ))
+  // APPOINTMENT BOOKED 
+  .add("Appointment Booked", () => (
+    <Fragment>
+      <Appointment
+        id={1}
+        time="4pm"
+        interview={{ student: "Lydia Miller-Jones", interviewer }}
+      />
+      <Appointment key="last" time="5pm" />
+    </Fragment>
+  ))
