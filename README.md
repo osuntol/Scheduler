@@ -42,7 +42,7 @@ npm run storybook
 ```
 ## Screenshots
 
-!["Appoinitmnet_List"]()
-!["Book_Appointment"]()
-!["Day_Highlight"]()
-!["Delete_Appointment"]()
+!["Appoinitmnet_List"](https://github.com/osuntol/Scheduler/blob/master/docs/appointment_list.png?raw=true)
+!["Book_Appointment"](https://github.com/osuntol/Scheduler/blob/master/docs/book_appointment.png?raw=true)
+!["Day_Highlight"](https://github.com/osuntol/Scheduler/blob/master/docs/day_highlight.png)
+!["Delete_Appointment"](https://github.com/osuntol/Scheduler/blob/master/docs/delete_appointment.png)
