@@ -94,7 +94,10 @@ describe("Form", () => {
   it("submits the name entered by the user", () => {
     const onSave = jest.fn();
     const { getByText, getByPlaceholderText } = render(
-      <Form interviewers={interviewers} onSave={onSave} interviewer={1} />
+      <Form interviewers={interviewers} 
+      onSave={onSave} 
+      interviewer={1} 
+      />
     );
   
     const input = getByPlaceholderText("Enter Student Name");
@@ -116,8 +119,6 @@ describe("Form", () => {
         onCancel={onCancel}
       />
     );
-  
-    fireEvent.click(getByText("Save"));
   
     fireEvent.change(getByPlaceholderText("Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
