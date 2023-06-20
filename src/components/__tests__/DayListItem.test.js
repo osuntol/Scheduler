@@ -1,6 +1,5 @@
 import React from "react";
-
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, getAllByTestId, queryByText,  } from "@testing-library/react";
 
 import DayListItem from "components/DayListItem";
 
@@ -11,6 +10,10 @@ afterEach(cleanup);
 // });
 
 it("renders 'no spots remaining' when there are 0 spots", () => {
+  const { container } = render(<DayListItem />);
+  const day = getAllByTestId(container, "day").find(day =>
+    queryByText(day, "Monday")
+  );  
   const { getByText } = render(<DayListItem name="Monday" spots={0} />);
   expect(getByText("no spots remaining")).toBeInTheDocument();
 });
