@@ -1,6 +1,6 @@
 import React from "react"
 import Button from "components/Button"
-import classNames from "classnames"
+
 
 export default function Confirm (props) {
 
