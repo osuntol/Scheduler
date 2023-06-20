@@ -55,9 +55,9 @@ const fixtures = {
 };
 
 export default {
-  defaults: { baseURL: "" },
+  defaults: { baseURL: "http://localhost:8001" },
   get: jest.fn(url => {
-    if (url === "/api/days") {
+    if (url.includes("/api/days")) {
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -65,7 +65,7 @@ export default {
       });
     }
 
-    if (url === "/api/appointments") {
+    if (url.includes("/api/appointments")) {
       /* Resolve appointments data */
       return Promise.resolve({
         status: 200,
@@ -74,12 +74,62 @@ export default {
       })
     }
 
-    if (url === "/api/interviewers") {
+    if (url.includes("/api/interviewers")) {
       /* Resolve interviewers data */
       return Promise.resolve({
         status: 200,
         statusText: 'OK',
         data: fixtures.interviewers
+      })
+    }
+  }),
+
+  put: jest.fn(url =>{
+    if (url.includes("/api/days")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      });
+    }
+
+    if (url.includes("/api/appointments")) {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      })
+    }
+
+    if (url.includes("/api/interviewers")) {
+      /* Resolve interviewers data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      })
+    }
+  }),
+
+  delete: jest.fn(url =>{
+    if (url.includes("/api/days")) {
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      });
+    }
+
+    if (url.includes("/api/appointments")) {
+      /* Resolve appointments data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      })
+    }
+
+    if (url.includes("/api/interviewers")) {
+      /* Resolve interviewers data */
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
       })
     }
   })
